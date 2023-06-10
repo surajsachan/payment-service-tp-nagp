@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "110f569e-7cc0-4b5a-b8f4-69d01bdf4718",
+		"name": "PaymentService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Make Payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set('transactionID',pm.response.json().transactionId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cardNumber\":\"1234567890123456\",\n    \"cvv\":\"123\",\n    \"amount\":\"4500\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/makePayment",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"makePayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refund request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"transactionId\":\"{{transactionID}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/refund",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"refund"
+					],
+					"query": [
+						{
+							"key": "transactionId",
+							"value": "cb76d473-0fda-462d-aca5-b40f67f1e0d7",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "transactionID",
+			"value": ""
+		}
+	]
+}
